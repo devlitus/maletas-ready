@@ -55,6 +55,5 @@ export class HomePage {
       }
       this.page.push(detallPage);
     }
-    console.log(detallPage.id);
   }
 }

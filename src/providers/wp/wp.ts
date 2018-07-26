@@ -18,7 +18,7 @@ export class WpProvider {
   }
   generalPages(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'pages/19?order=asc')
+      this.http.get(this.url+'pages?order=asc')
       .subscribe(data => {
         resolve(data);
       })

@@ -7,14 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <img src="https://maletaready.com/wp-content/uploads/2018/01/costa-rica-768x292.jpg" />
-  <ion-card *ngFor="let p of page">
-  
-    <ion-card-content>
-      <ion-card-title [innerHTML]="p.title"></ion-card-title>
-  
-      <p [innerHTML]="p.content"></p>
-    </ion-card-content>
+<ion-content class="card-background-page" padding>
+  <ion-card *ngFor="let pg of page">
+    <img src="https://maletaready.com/wp-content/uploads/2018/01/costa-rica-768x292.jpg"/>
+    <div class="card-title" [innerHTML]="pg.title"></div>
+    <!-- <div class="card-subtitle">41 Listings</div> -->
   </ion-card>
+  
 </ion-content>
