@@ -1,0 +1,7 @@
+{
+  "name": "maleta-ready",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
