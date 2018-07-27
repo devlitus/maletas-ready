@@ -8,10 +8,26 @@
 </ion-header>
 
 <ion-content class="card-background-page" padding>
-  <ion-card *ngFor="let pg of page">
-    <img src="https://maletaready.com/wp-content/uploads/2018/01/costa-rica-768x292.jpg"/>
-    <div class="card-title" [innerHTML]="pg.title"></div>
-    <!-- <div class="card-subtitle">41 Listings</div> -->
-  </ion-card>
-  
+  <!--  <div *ngFor="let ca of categoria">
+    <div *ngFor="let pg of page">
+      <ion-card *ngIf="ca.slug == pg.slug">
+        <img src="https://maletaready.com/wp-content/uploads/2018/01/costa-rica-768x292.jpg" />
+        <div class="card-title" [innerHTML]="pg.title"></div>
+        <div class="card-subtitle">41 Listings</div>
+      </ion-card>
+    </div>
+  </div> -->
+  <div *ngFor="let pg of page">
+    <div *ngIf="pg.id == 19">
+      <ion-card>
+        <img src="https://maletaready.com/wp-content/uploads/2018/01/costa-rica-768x292.jpg" />
+        <div ion-text class="card-title" [innerHTML]="pg.content"></div>
+        <!-- <div class="card-subtitle">41 Listings</div> -->
+      </ion-card>
+      <div [style]="pg.content">
+        <div [innerHTML]="pg.content"></div>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

@@ -9,13 +9,19 @@ import { WpMediaProvider } from "../../providers/wp-media/wp-media";
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public post: any = []
+  public post: any = [];
   public page: any = [];
+  public categoria: any = [];
+ 
   constructor(
     public navCtrl: NavController,
     private _wpService: WpProvider,
     private _wpMediaService: WpMediaProvider
-  ) {this.getPost(); this.getPage() }
+  ) {
+    this.getPost();
+    this.getPage();
+    this.getCategoria();
+  }
 
   getPost(){
     this._wpService.generalPost()
@@ -32,7 +38,8 @@ export class HomePage {
         'title': p.title.rendered,
         'content': p.content.rendered,
         'excerpt': p.excerpt.rendered,
-        'urlPost': p._links.self[0].href
+        'urlPost': p._links.self[0].href,
+        'featured_media': p.featured_media
       }
       this.post.push(detallPost);
     }
@@ -51,9 +58,27 @@ export class HomePage {
         'id': pg.id,
         'title': pg.title.rendered,
         'content': pg.content.rendered,
-        'excerpt': pg.excerpt.rendered
+        'excerpt': pg.excerpt.rendered,
+        'slug': pg.slug
       }
       this.page.push(detallPage);
+    }
+  }
+  getCategoria(){
+    this._wpService.generalCategorias()
+    .then(data => {
+      this.detallCategoria(data);
+    })
+    .catch(e => {console.error('fallo de post ', e);})
+  }
+  detallCategoria(data){
+    let detallCategoria;
+    for (const ca of data) {
+      detallCategoria = {
+        'id': ca.id,
+        'slug': ca.slug
+      }
+      this.categoria.push(detallCategoria);
     }
   }
 }

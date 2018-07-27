@@ -9,7 +9,7 @@ export class WpProvider {
   }
   generalPost(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?order=asc')
+      this.http.get(this.url+'posts?order=asc&per_page=100')
       .subscribe(data => {
         resolve(data);
       })
@@ -18,7 +18,7 @@ export class WpProvider {
   }
   generalPages(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'pages?order=asc')
+      this.http.get(this.url+'pages?order=asc&per_page=100')
       .subscribe(data => {
         resolve(data);
       })
