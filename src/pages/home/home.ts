@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 //provider
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
+//Pages
+import { AmericaPage, AsiaPage, EuropaPage, AfricaPage } from "../../app/index-pages";
 
 @Component({
   selector: 'page-home',
@@ -22,26 +24,22 @@ export class HomePage {
     this.getPage();
     this.getCategoria();
   }
-
-  getPost(){
-    this._wpService.generalPost()
-    .then(data => {
-      this.setPost(data);
-    })
-    .catch(e => {console.error('fallo de post ', e);})
-  }
-  setPost(data){
-    let detallPost;
-    for (const p of data) {
-      detallPost = {
-        'id': p.id,
-        'title': p.title.rendered,
-        'content': p.content.rendered,
-        'excerpt': p.excerpt.rendered,
-        'urlPost': p._links.self[0].href,
-        'featured_media': p.featured_media
-      }
-      this.post.push(detallPost);
+  onPages(page, id){
+    switch (page) {
+      case 'america':
+        this.navCtrl.push(AmericaPage, {id});
+        break;
+      case 'europa':
+        this.navCtrl.push(EuropaPage, {id});
+        break;
+      case 'africa':
+        this.navCtrl.push(AfricaPage, {id});
+        break;
+      case 'asia':
+        this.navCtrl.push(AsiaPage, {id});
+        break;
+      default:
+        break;
     }
   }
   getPage(){
@@ -59,11 +57,34 @@ export class HomePage {
         'title': pg.title.rendered,
         'content': pg.content.rendered,
         'excerpt': pg.excerpt.rendered,
-        'slug': pg.slug
+        'slug': pg.slug,
       }
       this.page.push(detallPage);
     }
   }
+  getPost(){
+    this._wpService.generalPost()
+    .then(data => {
+      this.setPost(data);
+    })
+    .catch(e => {console.error('fallo de post ', e);})
+  }
+  setPost(data){
+    let detallPost;
+    for (const p of data) {
+      detallPost = {
+        'id': p.id,
+        'title': p.title.rendered,
+        'content': p.content.rendered,
+        'excerpt': p.excerpt.rendered,
+        'urlPost': p._links.self[0].href,
+        'featured_media': p.featured_media,
+        'categoria': p.categories
+      }
+      this.post.push(detallPost);
+    }
+  }
+ 
   getCategoria(){
     this._wpService.generalCategorias()
     .then(data => {

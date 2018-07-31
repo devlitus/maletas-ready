@@ -5,7 +5,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //pages
-import { MyApp, HomePage, ListPage } from "./index-pages";
+import {
+  MyApp,
+  HomePage,
+  ListPage,
+  AmericaPage,
+  AsiaPage,
+  EuropaPage,
+  AfricaPage
+} from "./index-pages";
 //providers
 import { WpProvider } from '../providers/wp/wp';
 import { WpMediaProvider } from '../providers/wp-media/wp-media';
@@ -17,7 +25,11 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AmericaPage,
+    AsiaPage,
+    EuropaPage,
+    AfricaPage
   ],
   imports: [
     BrowserModule,
@@ -28,16 +40,20 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    AmericaPage,
+    AsiaPage,
+    EuropaPage,
+    AfricaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     WpProvider,
     WpMediaProvider,
 
-    
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Asia</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngFor="let po of post">
+    <ion-list *ngFor="let me of mediaPostAsia">
+      <ion-item *ngIf="po.id == me.post">
+        <ion-thumbnail item-start>
+          <img [src]="me.imagen">
+        </ion-thumbnail>
+        <h2>{{po.title.rendered}}</h2>
+        <p></p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
