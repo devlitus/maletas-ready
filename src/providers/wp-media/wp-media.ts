@@ -9,9 +9,17 @@ export class WpMediaProvider {
   constructor(public http: HttpClient) {
     
   }
-
-  mediaUrl(da){
+  mediaUrlAsia(da){
     return this.http.get(da);
+  }
+  mediaUrlAmerica(datos){
+    return this.http.get(datos);
+  }
+  mediaUrlEuropa(datos){
+    return this.http.get(datos);
+  }
+  mediaUrlAfrica(datos){
+    return this.http.get(datos);
   }
 
 }

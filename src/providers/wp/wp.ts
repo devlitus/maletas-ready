@@ -35,7 +35,7 @@ export class WpProvider {
     })
     return promise;
   }
-  idPagesAmerica(id){
+  /* idPagesAmerica(id){
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.url+'pages/'+id)
       .subscribe(data => {
@@ -43,7 +43,7 @@ export class WpProvider {
       }) 
     })
     return promise;
-  }
+  } */
   postAmerica(){
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.url+'posts?categories=58&per_page=100')
@@ -64,7 +64,7 @@ export class WpProvider {
   }
   postEuropa(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=60')
+      this.http.get(this.url+'posts?categories=60&per_page=100')
       .subscribe(data => {
         resolve(data);
       })
@@ -73,7 +73,7 @@ export class WpProvider {
   }
   postAfrica(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=59')
+      this.http.get(this.url+'posts?categories=59&per_page=100')
       .subscribe(data => {
         resolve(data);
       })

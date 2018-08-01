@@ -16,20 +16,18 @@ export class AsiaPage {
     public navParams: NavParams, 
     private _wpService: WpProvider,
     private _wpMediaService: WpMediaProvider
-  ) {
-  }
+  ) { }
 
   ionViewDidLoad() {
     this.getPostAsia();
-    
   }
   getPostAsia(){
     this._wpService.postAsia()
     .then(data => {
       this.post = data;
       console.log(this.post);
-      
       this.getMedia(data);
+   
     })
     .catch(e => {console.error('fallo post asia ', e);})
   }
@@ -41,12 +39,12 @@ export class AsiaPage {
         media.push(w.href);
       }
     }
-    this.prueba(media);
+    this.setMediaArray(media);
   }
-  prueba(media){
+  setMediaArray(media){
     for (let i = 0; i < media.length; i++) {
       const element = media[i];
-      this._wpMediaService.mediaUrl(element)
+      this._wpMediaService.mediaUrlAsia(element)
       .subscribe(res => {
         this.detalleMedia(res)
       })
@@ -63,7 +61,6 @@ export class AsiaPage {
       'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
     }
     this.mediaPostAsia.push(img);
-    
   }
 
 

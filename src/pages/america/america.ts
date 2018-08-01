@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
-
+import { WpMediaProvider } from "../../providers/wp-media/wp-media";
 
 @IonicPage()
 @Component({
@@ -10,38 +10,57 @@ import { WpProvider } from "../../providers/wp/wp";
   templateUrl: 'america.html',
 })
 export class AmericaPage {
-  public contentPage;
-  public posts;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _wpService: WpProvider,) {
+  public post: any = [];
+  public mediaPostAmerica: any = [];
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private _wpService: WpProvider, 
+    private _wpMediaService: WpMediaProvider) {
     
   }
 
   ionViewDidLoad() {
-    this.getPages();
     this.getPostAmerica();
-  }
-  getPages(){
-    let idPage = this.navParams.get('id');
-    this._wpService.idPagesAmerica(idPage)
-    .then(data => {
-      this.contentPage = data['content'].rendered 
-      console.log(data['content'].rendered);
-    })
-    .catch(e => {console.error('fallo get pages id ', e);})
-  }
-  setPages(data){
-    for (const pg of data) {
-      if (pg.slug == 'america') {
-        console.log(pg.id);
-      }
-    }
   }
   getPostAmerica(){
     this._wpService.postAmerica()
     .then(data => {
-      this.posts = data;
+      this.post = data;
+      console.log(this.post);
+      this.getMedia(data);
     })
-    .catch(e => {console.error('fallo post america ', e);})
+    .catch(e => {console.error('fallo post asia ', e);})
+  }
+  getMedia(data){
+    let media =[];
+    for (const d of data) {
+      for (const w of d._links['wp:featuredmedia']) {
+        media.push(w.href);
+      }
+    }
+    this.setMediaArray(media);
+  }
+  setMediaArray(media){
+    for (let i = 0; i < media.length; i++) {
+      const element = media[i];
+      this._wpMediaService.mediaUrlAmerica(element)
+      .subscribe(res => {
+        this.detalleMedia(res)
+      })
+    }
+  }
+  detalleMedia(data){
+    console.log(data);
+    let img = {
+      'post': data.post,
+      'imagen': data.source_url,
+      /* 'imagenMedium': data.media_details.sizes.medium.source_url,
+      'imagenFull': data.media_details.sizes.full.source_url,
+      'imagenMedium_large': data.media_details.sizes.medium_large.source_url,
+      'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
+    }
+    this.mediaPostAmerica.push(img);
   }
   
 }
