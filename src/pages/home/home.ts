@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 //provider
 import { WpProvider } from "../../providers/wp/wp";
-import { WpMediaProvider } from "../../providers/wp-media/wp-media";
 //Pages
 import { AmericaPage, AsiaPage, EuropaPage, AfricaPage } from "../../app/index-pages";
 
@@ -18,7 +17,6 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private _wpService: WpProvider,
-    private _wpMediaService: WpMediaProvider
   ) {
     this.getPost();
     this.getPage();
@@ -39,6 +37,7 @@ export class HomePage {
         this.navCtrl.push(AsiaPage, {id});
         break;
       default:
+        this.navCtrl.push(HomePage);
         break;
     }
   }

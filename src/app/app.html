@@ -6,14 +6,41 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+    <div menuClose *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-item-divider color="light">{{p.title}}</ion-item-divider>
+
+      <ion-item-group *ngFor="let cat of categoria">
+        <ion-item *ngIf="cat.categoria[0] === 57 && p.title === 'Asia'" [innerHTML]='cat.title'></ion-item>
+        <ion-item *ngIf="cat.categoria[0] === 58 && p.title === 'América'" [innerHTML]='cat.title'></ion-item>
+        <ion-item *ngIf="cat.categoria[0] === 60 && p.title === 'Europa'" [innerHTML]='cat.title'></ion-item>
+        <ion-item *ngIf="cat.categoria[0] === 59 && p.title === 'Africa'" [innerHTML]='cat.title'></ion-item>
+      </ion-item-group>
+    </div>
+
+
+
   </ion-content>
+
 
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<!-- <ion-content>
+  <ion-list>
+    <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      {{p.title}}
+    </button>
+  </ion-list>
+</ion-content> -->
+
+<!-- <div *ngFor="let co of titlePages">
+    <ion-item-divider color="light">{{co.title}}</ion-item-divider>
+    <ion-item-group *ngFor="let cat of categoria">
+      <ion-item *ngIf="cat.categoria[0] === 57 && co.title === 'Asia'" [innerHTML]='cat.title' (click)="openPage(co.title)"></ion-item>
+      <ion-item *ngIf="cat.categoria[0] === 58 && co.title === 'América'" [innerHTML]='cat.title'></ion-item>
+      <ion-item *ngIf="cat.categoria[0] === 60 && co.title === 'Europa'" [innerHTML]='cat.title'></ion-item>
+      <ion-item *ngIf="cat.categoria[0] === 59 && co.title === 'Africa'" [innerHTML]='cat.title'></ion-item>
+    </ion-item-group>
+  </div> -->

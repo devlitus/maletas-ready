@@ -12,7 +12,8 @@ import {
   AmericaPage,
   AsiaPage,
   EuropaPage,
-  AfricaPage
+  AfricaPage,
+  ModalPage
 } from "./index-pages";
 //providers
 import { WpProvider } from '../providers/wp/wp';
@@ -29,7 +30,8 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
     AmericaPage,
     AsiaPage,
     EuropaPage,
-    AfricaPage
+    AfricaPage,
+    ModalPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
     AmericaPage,
     AsiaPage,
     EuropaPage,
-    AfricaPage
+    AfricaPage,
+    ModalPage
   ],
   providers: [
     StatusBar,

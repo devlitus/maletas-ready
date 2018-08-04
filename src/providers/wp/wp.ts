@@ -10,9 +10,10 @@ export class WpProvider {
   }
   generalPost(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts')
+      this.http.get(this.url+'posts?')
       .subscribe(data => {
         resolve(data);
+        
       })
     })
     return promise;
@@ -35,18 +36,18 @@ export class WpProvider {
     })
     return promise;
   }
-  /* idPagesAmerica(id){
-    let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'pages/'+id)
+  postId(id){
+    const promise = new Promise((resolve, reject) => {
+      this.http.get(this.url+'posts?categories='+id+'&per_page=100&order=asc')
       .subscribe(data => {
         resolve(data);
-      }) 
+      })
     })
     return promise;
-  } */
+  }
   postAmerica(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=58&per_page=100')
+      this.http.get(this.url+'posts?categories=58&per_page=100&order=asc')
       .subscribe(data => {
         resolve(data);
       })
@@ -55,7 +56,7 @@ export class WpProvider {
   }
   postAsia(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=57&per_page=100')
+      this.http.get(this.url+'posts?categories=57&per_page=100&order=asc')
       .subscribe(data => {
         resolve(data);
       })
@@ -64,7 +65,7 @@ export class WpProvider {
   }
   postEuropa(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=60&per_page=100')
+      this.http.get(this.url+'posts?categories=60&per_page=50&order=asc')
       .subscribe(data => {
         resolve(data);
       })
@@ -73,7 +74,7 @@ export class WpProvider {
   }
   postAfrica(){
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.url+'posts?categories=59&per_page=100')
+      this.http.get(this.url+'posts?categories=59&per_page=100&order=asc')
       .subscribe(data => {
         resolve(data);
       })

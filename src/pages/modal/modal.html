@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button clear ion-start (click)="dismiss()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+      <ion-title ion-text text-center>modal</ion-title>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<div *ngFor="let p of post">
+    <div *ngFor="let m of mediaPost">
+      <ion-card *ngIf="p.id == m.post">
+        <img [src]="m.imagen" />
+        <ion-card-content>
+          <!-- <ion-card-title [innerHTML]="p.title"></ion-card-title> -->
+          <p [innerHTML]="p.content"></p>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+  </div>
+</ion-content>
+

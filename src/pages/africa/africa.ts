@@ -27,7 +27,6 @@ export class AfricaPage {
     this._wpService.postAfrica()
     .then(data => {
       this.post = data;
-      console.log(this.post);
       this.getMedia(data);
     })
     .catch(e => {console.error('fallo post asia ', e);})
@@ -51,7 +50,6 @@ export class AfricaPage {
     }
   }
   detalleMedia(data){
-    console.log(data);
     let img = {
       'post': data.post,
       'imagen': data.source_url,

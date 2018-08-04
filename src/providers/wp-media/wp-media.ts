@@ -21,5 +21,8 @@ export class WpMediaProvider {
   mediaUrlAfrica(datos){
     return this.http.get(datos);
   }
+  mediaUrl(data){
+    return this.http.get(data);
+  }
 
 }

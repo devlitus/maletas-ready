@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
+// page
+import { ModalPage } from "../modal/modal";
 
 @IonicPage()
 @Component({
@@ -13,46 +15,67 @@ export class EuropaPage {
   public post: any = [];
   public mediaPostEuropa: any = [];
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    private _wpService: WpProvider, 
-    private _wpMediaService: WpMediaProvider) {
-    
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _wpService: WpProvider,
+    private _wpMediaService: WpMediaProvider,
+    public modalCtrl: ModalController) {
+
   }
 
   ionViewDidLoad() {
     this.getPostEuropa();
   }
-  getPostEuropa(){
+  getPostEuropa() {
     this._wpService.postEuropa()
-    .then(data => {
-      this.post = data;
-      console.log(this.post);
-      this.getMedia(data);
-    })
-    .catch(e => {console.error('fallo post asia ', e);})
+      .then(data => {
+        this.setPostEuropa(data);
+      })
+      .catch(e => { console.error('fallo post europa ', e); })
   }
-  getMedia(data){
-    let media =[];
+  setPostEuropa(data) {
+    let posts;
+    let strTitle;
     for (const d of data) {
-      for (const w of d._links['wp:featuredmedia']) {
-        media.push(w.href);
+      strTitle = d.title.rendered.split(' ');
+      if (strTitle[0] == 'Ruta') {
+        posts = {
+          'id': d.id,
+          'post': d.posts,
+          'title': d.title.rendered,
+          'excerpt': d.excerpt.rendered,
+          'featured_media': d.featured_media,
+          'categories': d.categories,
+          'wp:featuredmedia': d._links['wp:featuredmedia']
+        }
+        this.post.push(posts);
+        this.getMedia(posts);
+        console.log("post", posts);
       }
+    }
+  }
+  getMedia(data) {
+    let media = [];
+    for (const d of data['wp:featuredmedia']) {
+      media.push(d.href);
     }
     this.setMediaArray(media);
   }
-  setMediaArray(media){
-    for (let i = 0; i < media.length; i++) {
-      const element = media[i];
-      this._wpMediaService.mediaUrlEuropa(element)
-      .subscribe(res => {
-        this.detalleMedia(res)
-      })
+  setMediaArray(media) {
+    for (const key in media) {
+      if (media.hasOwnProperty(key)) {
+        const element = media[key];
+        this._wpMediaService.mediaUrlEuropa(element)
+          .subscribe(res => {
+            this.detalleMedia(res)
+            console.log("media", res);
+          })
+      }
     }
   }
-  detalleMedia(data){
-    console.log(data);
+  detalleMedia(data) {
     let img = {
+      'id': data.id,
       'post': data.post,
       'imagen': data.source_url,
       /* 'imagenMedium': data.media_details.sizes.medium.source_url,
@@ -61,6 +84,10 @@ export class EuropaPage {
       'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
     }
     this.mediaPostEuropa.push(img);
+  }
+  openModal(id){
+    const modal = this.modalCtrl.create(ModalPage, {id});
+    modal.present(); 
   }
 
 }
