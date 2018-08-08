@@ -1,19 +1,19 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Guia Asia</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content style="background-color: rgb(233, 255, 235)">
   <div *ngFor="let po of post">
     <div *ngFor="let me of mediaPostAsia">
       <ion-card *ngIf="po.id == me.post">
-        <img [src]="me.imagen" />
+        <img [src]="me.imagen" (click)="openModal(po.categories)" />
         <ion-card-content>
           <ion-card-title [innerHTML]="po.title"></ion-card-title>
-          <p [innerHTML]="po.excerpt"></p>
+          <p [innerHTML]="po.excerpt | sanitizeHtml"></p>
           <button ion-button clear small color="danger" icon-start>
             <ion-icon name='share-alt'></ion-icon>
             Share

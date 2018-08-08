@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from "@angular/common/http";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { PipesModule } from "../pipes/pipes.module";
 //pages
 import {
   MyApp,
@@ -36,6 +37,7 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
   imports: [
     BrowserModule,
     HttpClientModule,
+    PipesModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

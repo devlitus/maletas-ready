@@ -21,10 +21,10 @@ export class WpProvider {
   generalPages(){
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.url+'pages?order=asc&per_page=100')
-      .subscribe(data => {
-        resolve(data);
-      })
-    })
+        .subscribe(data => {
+          resolve(data);
+        })
+    });
     return promise;
   }
   generalCategorias(){
@@ -33,7 +33,7 @@ export class WpProvider {
       .subscribe(data => {
         resolve(data);
       })
-    })
+    });
     return promise;
   }
   postId(id){
@@ -42,16 +42,16 @@ export class WpProvider {
       .subscribe(data => {
         resolve(data);
       })
-    })
+    });
     return promise;
   }
   postAmerica(){
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.url+'posts?categories=58&per_page=100&order=asc')
-      .subscribe(data => {
-        resolve(data);
-      })
-    })
+        .subscribe(data => {
+          resolve(data)
+        })
+    });
     return promise;
   }
   postAsia(){
@@ -60,7 +60,7 @@ export class WpProvider {
       .subscribe(data => {
         resolve(data);
       })
-    })
+    });
     return promise;
   }
   postEuropa(){
@@ -69,7 +69,7 @@ export class WpProvider {
       .subscribe(data => {
         resolve(data);
       })
-    })
+    });
     return promise;
   }
   postAfrica(){
@@ -79,6 +79,15 @@ export class WpProvider {
         resolve(data);
       })
     })
+    return promise;
+  }
+  poId(id){
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(this.url+'posts/'+id)
+      .subscribe(data => {
+        resolve(data);
+      })
+    });
     return promise;
   }
 }

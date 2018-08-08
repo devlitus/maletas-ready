@@ -1,39 +1,33 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 //provider
 import { WpProvider } from "../providers/wp/wp";
+//pages
+import { HomePage, ModalPage } from "../app/index-pages";
 
-import { HomePage, AsiaPage, AmericaPage, EuropaPage, AfricaPage } from "../app/index-pages";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
-
-  pages: Array<{ title: string, component: any }>;
-  titlePages: any = [];
+  pet: string = "Asia";
+  isAndroid: boolean = false;
+  pages: any = [];
   categoria: any = [];
+  mediaPages: any = [];
+
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private _wpService: WpProvider) {
+    private _wpService: WpProvider,
+    public modalCtrl: ModalController) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Asia', component: AsiaPage },
-      { title: 'América', component: AmericaPage },
-      { title: 'Europa', component: EuropaPage },
-      { title: 'Africa', component: AfricaPage }
-    ];
-
+    this.isAndroid = platform.is('android');
+    this.getPages();
     this.getCategoria();
   }
 
@@ -46,12 +40,6 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
   getCategoria() {
     this._wpService.postId(114)
       .then(res => {
@@ -63,14 +51,32 @@ export class MyApp {
     let cat;
     for (const dato of res) {
       cat = {
+        'id': dato.id,
         'title': dato.title.rendered,
         'categoria': dato.categories
-      }
+      };
       this.categoria.push(cat);
     }
-    console.log(this.categoria);
-    
-  }
+    console.log("categoria", this.categoria);
 
+  }
+  getPages() {
+    this._wpService.generalPages()
+      .then(res => {
+        this.setPages(res);
+      })
+  }
+  setPages(res) {
+    res.filter(e => {
+      if (e.slug === 'asia' || e.slug === 'america' || e.slug === 'europa' || e.slug === 'africa') {
+        return this.pages.push(e)
+      }
+    });
+    console.log(this.pages);
+  }
+  openModal(id){
+    let modal = this.modalCtrl.create(ModalPage, {id})
+    modal.present();
+  }
 
 }

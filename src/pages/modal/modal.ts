@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angu
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
 
+
 @IonicPage()
 @Component({
   selector: 'page-modal',
@@ -20,6 +21,16 @@ export class ModalPage {
 
   ionViewDidLoad() {
     this.getPost();
+    // this.posts();
+  }
+  posts(){ //prueba
+    const params = this.navParams.get('id');
+    this._wpService.poId(params)
+    .then(res => {
+      this.setPost(res);
+    })
+    .catch(e => {console.error('fallo modal ', e);})
+    console.log(params);
   }
   getPost(){
     const params = this.navParams.get('id');
@@ -33,8 +44,8 @@ export class ModalPage {
     .then(res => {
       this.setPost(res);
     })
-    .catch(e => {console.error('fallo modal ', e);})
-    console.log(categorias);
+    .catch(e => {console.error('fallo modal post ', e);})
+    console.log(params);
   }
   setPost(res){
     let posts;
@@ -75,7 +86,7 @@ export class ModalPage {
     let img = {
       'id': data.id,
       'post': data.post,
-      'imagen': data.source_url,
+      'imagen': data.source_url
       /* 'imagenMedium': data.media_details.sizes.medium.source_url,
       'imagenFull': data.media_details.sizes.full.source_url,
       'imagenMedium_large': data.media_details.sizes.medium_large.source_url,

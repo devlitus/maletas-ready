@@ -1,13 +1,13 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Maletas Ready</ion-title>
+    <ion-title>Maleta Ready</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="card-background-page">
+<ion-content style="background-color: rgb(233, 255, 235)" class="card-background-page">
   <div *ngFor="let pg of page">
     <span [ngSwitch]="pg.slug">
       <p *ngSwitchCase="'america'">
