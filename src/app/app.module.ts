@@ -9,7 +9,6 @@ import { PipesModule } from "../pipes/pipes.module";
 import {
   MyApp,
   HomePage,
-  ListPage,
   AmericaPage,
   AsiaPage,
   EuropaPage,
@@ -27,7 +26,6 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     AmericaPage,
     AsiaPage,
     EuropaPage,
@@ -44,7 +42,6 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     AmericaPage,
     AsiaPage,
     EuropaPage,
