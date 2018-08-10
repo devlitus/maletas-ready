@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Content } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
@@ -12,6 +12,7 @@ import { ModalPage } from "../modal/modal";
   templateUrl: 'america.html',
 })
 export class AmericaPage {
+  @ViewChild(Content) Content: Content;
   public post: any = [];
   public mediaPostAmerica: any = [];
   constructor(
@@ -22,7 +23,9 @@ export class AmericaPage {
     public modalCtrl: ModalController) {
     
   }
-
+  scrollTop(){
+    this.Content.scrollTo(0, 0);
+  }
   ionViewDidLoad() {
     this.getPostAmerica();
   }
