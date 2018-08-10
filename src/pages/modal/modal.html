@@ -9,7 +9,6 @@
 
 </ion-header>
 
-
 <ion-content style="background-color: rgb(233, 255, 235)">
   <div *ngFor="let p of post">
     <div *ngFor="let m of mediaPost">
@@ -33,4 +32,7 @@
       </div>
     </div>
   </ng-template>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="scrollTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+  </ion-fab>
 </ion-content>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, Content  } from 'ionic-angular';
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
 
@@ -10,6 +10,7 @@ import { WpMediaProvider } from "../../providers/wp-media/wp-media";
   templateUrl: 'modal.html',
 })
 export class ModalPage {
+  @ViewChild(Content) Content: Content;
   public post = [];
   public mediaPost = [];
   constructor(
@@ -22,6 +23,9 @@ export class ModalPage {
   ionViewDidLoad() {
     this.getPost();
     // this.posts();
+  }
+  scrollTop(){
+    this.Content.scrollTo(0, 0);
   }
   posts(){ //prueba
     const params = this.navParams.get('id');
