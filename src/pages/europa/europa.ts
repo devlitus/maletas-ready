@@ -37,56 +37,29 @@ export class EuropaPage {
       .catch(e => { console.error('fallo post europa ', e); })
   }
   setPostEuropa(data) {
-    let posts;
-    let strTitle;
-    for (const d of data) {
-      strTitle = d.title.rendered.split(' ');
-      if (strTitle[0] == 'Ruta') {
-        posts = {
-          'id': d.id,
-          'post': d.posts,
-          'title': d.title.rendered,
-          'excerpt': d.excerpt.rendered,
-          'featured_media': d.featured_media,
-          'categories': d.categories,
-          'wp:featuredmedia': d._links['wp:featuredmedia']
+    data.filter(e => {
+      for (const element of e.categories) {
+        if (element === 114) {
+          this.post.push(e);
         }
-        this.post.push(posts);
-        this.getMedia(posts);
-        console.log("post", posts);
+      }
+      
+    })
+    for (const imag of this.post) {
+      for (const im of imag._links['wp:featuredmedia']) {
+        this._wpMediaService.mediaUrl(im.href)
+        .subscribe(res => {
+          this.detalleMedia(res);
+        })
       }
     }
+    // console.log('posts ', this.post);
   }
-  getMedia(data) {
-    let media = [];
-    for (const d of data['wp:featuredmedia']) {
-      media.push(d.href);
-    }
-    this.setMediaArray(media);
-  }
-  setMediaArray(media) {
-    for (const key in media) {
-      if (media.hasOwnProperty(key)) {
-        const element = media[key];
-        this._wpMediaService.mediaUrlEuropa(element)
-          .subscribe(res => {
-            this.detalleMedia(res)
-            console.log("media", res);
-          })
-      }
-    }
-  }
-  detalleMedia(data) {
-    let img = {
-      'id': data.id,
-      'post': data.post,
-      'imagen': data.source_url,
-      /* 'imagenMedium': data.media_details.sizes.medium.source_url,
-      'imagenFull': data.media_details.sizes.full.source_url,
-      'imagenMedium_large': data.media_details.sizes.medium_large.source_url,
-      'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
-    }
-    this.mediaPostEuropa.push(img);
+  detalleMedia(data){
+    this.mediaPostEuropa.push(data);
+    // console.log('media ', this.mediaPostEuropa);
+    // console.log(data);
+
   }
   openModal(id){
     const modal = this.modalCtrl.create(ModalPage, {id});

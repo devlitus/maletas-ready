@@ -11,8 +11,11 @@ import { WpMediaProvider } from "../../providers/wp-media/wp-media";
 })
 export class ModalPage {
   @ViewChild(Content) Content: Content;
-  public post = [];
-  public mediaPost = [];
+  postAsia: any = [];
+  postAmerica: any = [];
+  postAfrica: any = [];
+  postEuropa: any = [];
+  postMedia: any = [];
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -22,82 +25,110 @@ export class ModalPage {
 
   ionViewDidLoad() {
     this.getPost();
-    // this.posts();
   }
   scrollTop(){
     this.Content.scrollTo(0, 0);
   }
-  posts(){ //prueba
-    const params = this.navParams.get('id');
-    this._wpService.poId(params)
-    .then(res => {
-      this.setPost(res);
-    })
-    .catch(e => {console.error('fallo modal ', e);})
-    console.log(params);
-  }
   getPost(){
     const params = this.navParams.get('id');
-    let categorias;
-    categorias = {
-      'continente': params[0],
-      'pais': params[1],
-      'ciudad': params[2]
-    }
-    this._wpService.postId(categorias.pais)
-    .then(res => {
-      this.setPost(res);
-    })
-    .catch(e => {console.error('fallo modal post ', e);})
-    console.log(params);
-  }
-  setPost(res){
-    let posts;
-    for (const r of res) {
-      posts = {
-        'id': r.id,
-        'post': r.posts,
-        'title': r.title.rendered,
-        'content': r.content.rendered,
-        'excerpt': r.excerpt.rendered,
-        'featured_media': r.featured_media,
-        'categories': r.categories,
-        'wp:featuredmedia': r._links['wp:featuredmedia']
+    params.find(e => {
+      if (e == 57) {
+        this.getPostAsia();
       }
-      console.log('posts', posts);
-      this.getMedia(posts);
-      this.post.push(posts);
+    });
+    params.find(e => {
+      if (e == 58) {
+        this.getPostAmerica();
+      }
+    });
+    params.find(e => {
+      if (e == 60) {
+        this.getPostEuropa();
+      }
+    });
+    params.find(e => {
+      if (e == 59) {
+        this.getPostEuropa();
+      }
+    });
+    
+  }
+
+  getPostAsia(){
+    const params = this.navParams.get('id');
+    console.log('params asia', params);
+    let temp = params.filter(e => {
+      if ((e !== 114) && (e !== 57)) {
+        return e
+      }
+    })
+    this.recuperacion(temp);
+  }
+  getPostAmerica(){
+    const params = this.navParams.get('id');
+    console.log('params america', params);
+    let temp = params.filter(e => {
+      if ((e !== 114) && (e !== 58)) {
+        return e
+      }
+    })
+    this.recuperacion(temp);
+  }
+  
+  getPostEuropa(){
+    const params = this.navParams.get('id');
+    console.log('params europa', params);
+    let temp = params.filter(e => {
+      if ((e !== 114) && (e !== 60)) {
+        return e;
+      }
+    })
+    this.recuperacion(temp);
+    // console.log(Object.keys(temp).length);
+  }
+  private recuperacion(temp: any) {
+    if (Object.keys(temp).length == 2) {
+      let id = Math.min(temp[0], temp[1]);
+      this._wpService.categoriasId(id)
+        .then(res => {
+          this.postEuropa.push(res);
+          this.setMedia(res);
+          console.log(res);
+        });
+    }
+    else {
+      this._wpService.categoriasId(temp)
+        .then(res => {
+          this.postEuropa.push(res);
+          this.setMedia(res);
+        });
     }
   }
-  getMedia(data) {
-    let media = [];
-    for (const d of data['wp:featuredmedia']) {
-      media.push(d.href);
+
+  setMedia(data){
+    for (const dat of data) {
+      for (const d of dat._links['wp:featuredmedia']) {
+        this._wpMediaService.mediaUrl(d.href)
+        .subscribe(res => {
+          this.postMedia.push(res);
+          console.log(res['id']);
+        })
+      }
     }
-    this.setMediaArray(media);
+    
   }
-  setMediaArray(media) {
-    for (let i = 0; i < media.length; i++) {
-      const element = media[i];
-      this._wpMediaService.mediaUrl(element)
-      .subscribe(res => {
-        this.detalleMedia(res)
-      })
-    }
-  }
-  detalleMedia(data) {
-    // console.log("media", data);
-    let img = {
-      'id': data.id,
-      'post': data.post,
-      'imagen': data.source_url
-      /* 'imagenMedium': data.media_details.sizes.medium.source_url,
-      'imagenFull': data.media_details.sizes.full.source_url,
-      'imagenMedium_large': data.media_details.sizes.medium_large.source_url,
-      'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
-    }
-    console.log('media', img);
-    this.mediaPost.push(img);
+  getPostAfrica(){
+    const params = this.navParams.get('id');
+    console.log('params africa', params);
+    params.filter(e => {
+      if ((e !== 114) && (e !== 59)) {
+        this._wpService.categoriasId(e)
+        .then(res => {
+          this.postAfrica.push(res);
+          console.log(res);
+        })
+      }
+    })
   }
   dismiss(){
     this.viewCtrl.dismiss();

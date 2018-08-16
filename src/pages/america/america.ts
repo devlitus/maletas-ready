@@ -13,7 +13,7 @@ import { ModalPage } from "../modal/modal";
 })
 export class AmericaPage {
   @ViewChild(Content) Content: Content;
-  public post: any = [];
+  public posts: any = [];
   public mediaPostAmerica: any = [];
   constructor(
     public navCtrl: NavController, 
@@ -37,54 +37,29 @@ export class AmericaPage {
       .catch(e => { console.error('fallo post asia ', e); })
   }
   setPostAmerica(data) {
-    let posts;
-    let strTitle;
-    for (const d of data) {
-      strTitle = d.title.rendered.split(' ');
-      if (strTitle[0] == 'Ruta') {
-        posts = {
-          'id': d.id,
-          'post': d.posts,
-          'title': d.title.rendered,
-          'excerpt': d.excerpt.rendered,
-          'featured_media': d.featured_media,
-          'categories': d.categories,
-          'wp:featuredmedia': d._links['wp:featuredmedia']
+    data.filter(e => {
+      for (const element of e.categories) {
+        if (element === 114) {
+          this.posts.push(e);
         }
-        this.post.push(posts);
-        this.getMedia(posts);
-        console.log("post", posts);
+      }
+      
+    })
+    for (const imag of this.posts) {
+      for (const im of imag._links['wp:featuredmedia']) {
+        this._wpMediaService.mediaUrl(im.href)
+        .subscribe(res => {
+          this.detalleMedia(res);
+        })
       }
     }
+    console.log('posts ', this.posts);
   }
-  getMedia(data) {
-    let media = [];
-    for (const d of data['wp:featuredmedia']) {
-      media.push(d.href);
-    }
-    this.setMediaArray(media);
-  }
-  setMediaArray(media) {
-    for (let i = 0; i < media.length; i++) {
-      const element = media[i];
-      this._wpMediaService.mediaUrlAmerica(element)
-      .subscribe(res => {
-        this.detalleMedia(res)
-      })
-    }
-  }
-  detalleMedia(data) {
-    console.log("media", data);
-    let img = {
-      'id': data.id,
-      'post': data.post,
-      'imagen': data.source_url,
-      /* 'imagenMedium': data.media_details.sizes.medium.source_url,
-      'imagenFull': data.media_details.sizes.full.source_url,
-      'imagenMedium_large': data.media_details.sizes.medium_large.source_url,
-      'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
-    }
-    this.mediaPostAmerica.push(img);
+  detalleMedia(data){
+    this.mediaPostAmerica.push(data);
+    console.log('media ', this.mediaPostAmerica);
+    // console.log(data);
+
   }
   openModal(id){
     const modal = this.modalCtrl.create(ModalPage, {id});

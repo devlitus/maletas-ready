@@ -36,7 +36,8 @@ export class WpProvider {
     });
     return promise;
   }
-  postId(id){
+  categoriasId(id){
+    console.log('categoriasId', id);
     const promise = new Promise((resolve, reject) => {
       this.http.get(this.url+'posts?categories='+id+'&per_page=100&order=asc')
       .subscribe(data => {

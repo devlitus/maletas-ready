@@ -8,19 +8,22 @@
 </ion-header>
 <ion-content id="inicio" style="background-color: rgb(233, 255, 235)">
   <div *ngFor="let po of post">
-    <div *ngFor="let me of mediaPostAsia">
-      <ion-card *ngIf="po.id == me.post">
-        <img [src]="me.imagen" (click)="openModal(po.categories)" />
+    <div *ngFor="let media of mediaPostAsia">
+      <ion-card *ngIf="po.featured_media == media.id">
+        <img [src]="media.source_url" (click)="openModal(po.categories)" />
         <ion-card-content >
-          <ion-card-title [innerHTML]="po.title"></ion-card-title>
-          <p [innerHTML]="po.excerpt | sanitizeHtml"></p>
+          <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
+          <p [innerHTML]="po.excerpt.rendered | sanitizeHtml"></p>
           <button ion-button clear small color="danger" icon-start>
             <ion-icon name='share-alt'></ion-icon>
             Share
           </button>
-          <button ion-button clear small color="primary" icon-start (click)="openModal(po.categories)">
-              <ion-icon name="open"></ion-icon>
-              View
+          <button ion-button clear small>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
           </button>
         </ion-card-content>
       </ion-card>
