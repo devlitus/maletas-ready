@@ -42,7 +42,7 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
       iconMode: 'md',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
-      // tabsPlacement: 'bottom',
+      menuType: 'reveal',
       pageTransition: 'md-transition'
     }),
   ],
