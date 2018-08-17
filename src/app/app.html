@@ -17,36 +17,36 @@
         <ion-segment-button value="Europa">
           Europa
         </ion-segment-button>
-        <ion-segment-button value="Africa">
+        <ion-segment-button value="Africa" [hidden]='true'>
           Africa
         </ion-segment-button>
       </ion-segment>
     </div>
     <div menuClose *ngFor="let p of pages" style="background-color: rgb(233, 255, 235)">
-      <div [ngSwitch]="pet" *ngFor="let cat of categoria">
+      <div [ngSwitch]="pet" *ngFor="let cat of categoria; let i=index">
         <ion-list *ngSwitchCase="'Asia'" >
-          <ion-item *ngIf="cat.categoria[0] === 57 && p.slug === 'asia'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
+          <ion-item *ngIf="cat.catId[0] === 57 && p.slug === 'asia'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
             <ion-thumbnail item-start>
               <!-- <img src="img/thumbnail-puppy-1.jpg"> -->
             </ion-thumbnail>
           </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'America'">
-          <ion-item *ngIf="cat.categoria[0] === 58 && p.slug === 'america'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
+          <ion-item *ngIf="cat.catId[0] === 58 && p.slug === 'america'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
             <ion-thumbnail item-start>
               <!-- <img src="img/thumbnail-puppy-1.jpg"> -->
             </ion-thumbnail>
           </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'Europa'">
-          <ion-item *ngIf="cat.categoria[0] === 60 && p.slug === 'europa'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
+          <ion-item *ngIf="cat.catId[0] === 60 && p.slug === 'europa'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
             <ion-thumbnail item-start>
               <!-- <img src="img/thumbnail-puppy-1.jpg"> -->
             </ion-thumbnail>
           </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'Africa'">
-          <ion-item *ngIf="cat.categoria[0] === 59 && p.title === 'Africa'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
+          <ion-item *ngIf="cat.catId[0] === 59 && p.title === 'Africa'" [innerHTML]='cat.title' (click)="openModal(cat.categoria)" style="background-color: rgb(233, 255, 235)">
             <ion-thumbnail item-start>
               <!-- <img src="img/thumbnail-puppy-1.jpg"> -->
             </ion-thumbnail>

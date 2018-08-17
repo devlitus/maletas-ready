@@ -45,7 +45,7 @@ export class MyApp {
       .then(res => {
         this.setCategoria(res);
       })
-      .catch(e => { console.error('Fallo categoria app ', e); })
+      .catch(e => { console.error('Fallo categoria app ', e); });
   }
   setCategoria(res) {
     let cat;
@@ -53,11 +53,12 @@ export class MyApp {
       cat = {
         'id': dato.id,
         'title': dato.title.rendered,
-        'categoria': dato.categories
+        'categoria': dato.categories,
+        'catId': dato.categories.filter(e => {return e === 59 || e === 58 || e === 57 || e === 60 || e === 102})
       };
       this.categoria.push(cat);
     }
-    // console.log("categoria", this.categoria);
+    console.log("categoria", this.categoria);
 
   }
   getPages() {
@@ -72,7 +73,7 @@ export class MyApp {
         return this.pages.push(e)
       }
     });
-    // console.log(this.pages);
+    console.log(this.pages);
   }
   openModal(id){
     let modal = this.modalCtrl.create(ModalPage, {id})

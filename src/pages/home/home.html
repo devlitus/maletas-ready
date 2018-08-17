@@ -18,7 +18,7 @@
         </ion-card>
       </p>
       <p *ngSwitchCase="'africa'">
-        <ion-card>
+        <ion-card [hidden]='true'>
           <img src="assets/imgs/africa.jpg" (click)="onPages('africa')" />
           <div class="card-title">Guia {{pg.title}}</div>
           <div class="card-subtitle"></div>
