@@ -12,30 +12,26 @@
     <span [ngSwitch]="pg.slug">
       <p *ngSwitchCase="'america'">
         <ion-card>
-          <img src="assets/imgs/america.jpg" (click)="onPages('america',pg.id)" />
+          <img src="assets/imgs/America.png" (click)="onPages('america',pg.id)" />
           <div class="card-title">Guia {{pg.title}}</div>
-          <div class="card-subtitle"></div>
         </ion-card>
       </p>
       <p *ngSwitchCase="'africa'">
         <ion-card [hidden]='true'>
-          <img src="assets/imgs/africa.jpg" (click)="onPages('africa')" />
+          <img src="assets/imgs/Africa.png" (click)="onPages('africa')" />
           <div class="card-title">Guia {{pg.title}}</div>
-          <div class="card-subtitle"></div>
         </ion-card>
       </p>
       <p *ngSwitchCase="'asia'">
         <ion-card>
-          <img src="assets/imgs/asia.jpg" (click)="onPages('asia')" />
+          <img src="assets/imgs/Asia.png" (click)="onPages('asia')" />
           <div class="card-title">Guia {{pg.title}}</div>
-          <div class="card-subtitle"></div>
         </ion-card>
       </p>
       <p *ngSwitchCase="'europa'">
         <ion-card>
-          <img src="assets/imgs/europa.jpg" (click)="onPages('europa')" />
+          <img src="assets/imgs/Europe.png" (click)="onPages('europa')" />
           <div class="card-title">Guia {{pg.title}}</div>
-          <div class="card-subtitle"></div>
         </ion-card>
       </p>
       <p *ngSwitchDefault>
