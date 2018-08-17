@@ -36,7 +36,15 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
     BrowserModule,
     HttpClientModule,
     PipesModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Atras',
+      backButtonIcon: 'md-arrow-back',
+      iconMode: 'md',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      // tabsPlacement: 'bottom',
+      pageTransition: 'md-transition'
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

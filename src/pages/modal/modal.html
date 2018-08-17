@@ -16,7 +16,7 @@
         <ion-card *ngIf="post.featured_media == media.id">
           <img [src]="media.source_url" />
           <ion-card-content>
-            <p [innerHTML]="post.excerpt.rendered | sanitizeHtml"></p>
+            <p [innerHTML]="post.content.rendered | sanitizeHtml"></p>
           </ion-card-content>
         </ion-card>
       </div>
