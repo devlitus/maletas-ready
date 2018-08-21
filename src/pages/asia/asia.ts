@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Content  } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Content, FabContainer  } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
@@ -13,8 +13,10 @@ import { ModalPage } from "../modal/modal";
 })
 export class AsiaPage {
   @ViewChild(Content) Content: Content;
-  public post: any = [];
-  public mediaPostAsia: any = [];
+  @ViewChild('titulo') titulo: ElementRef;
+  public post: any[] = [];
+  public mediaPostAsia: any[] = [];
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,14 +30,15 @@ export class AsiaPage {
   ionViewDidLoad() {
     this.getPostAsia();
   }
-  getPostAsia() {
+
+  getPostAsia(): void {
     this._wpService.postAsia()
     .then(data => {
       this.setPostAsia(data);
     })
     .catch(e => { console.error('fallo post asia ', e); })
   }
-  setPostAsia(data) {
+  setPostAsia(data): void {
     data.filter(e => {
       for (const element of e.categories) {
         if (element === 114) {
@@ -54,14 +57,40 @@ export class AsiaPage {
     }
     // console.log('posts ', this.post);
   }
-  detalleMedia(data){
+  detalleMedia(data: Object){
     this.mediaPostAsia.push(data);
     // console.log('media ', this.mediaPostAsia);
     // console.log(data);
   }
-  openModal(id){
+  anchor(bad){
+    // console.log(bad);
+    console.log(this.titulo.nativeElement.offsetParent.children);
+    for (const i of this.titulo.nativeElement.offsetParent.children) {
+      console.log(i.children);
+    }
+    
+    /* for (let i = 0; i < this.titulo.nativeElement.offsetParent.children.length; i++) {
+      const element = this.titulo.nativeElement.offsetParent.children[i];
+      const cont = element.innerText.split('\n');
+      content.push(cont)
+      console.log(element);
+    }
+    content[0].find(e => {
+      if (e === bad){
+        this.Content.scrollTo(0,this.titulo.nativeElement.offsetTop);
+        console.log(e);
+      }
+    }) */
+
+  }
+  openModal(id: string){
     const modal = this.modalCtrl.create(ModalPage, {id});
     modal.present(); 
+  }
+
+  openSocial(network: string, fab: FabContainer) {
+    console.log('Share in ' + network);
+    fab.close();
   }
 
 }

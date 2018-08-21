@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Content, FabContainer } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
@@ -64,6 +64,10 @@ export class EuropaPage {
   openModal(id){
     const modal = this.modalCtrl.create(ModalPage, {id});
     modal.present(); 
+  }
+  openSocial(network: string, fab: FabContainer) {
+    console.log('Share in ' + network);
+    fab.close();
   }
 
 }

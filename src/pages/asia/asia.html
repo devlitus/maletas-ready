@@ -6,25 +6,33 @@
     <ion-title>Guia Asia</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content id="inicio" style="background-color: rgb(233, 255, 235)">
+<ion-content style="background-color: rgb(233, 255, 235)">
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let po of post">
+          <ion-badge #bad color="secondary" [innerHTML]="po.title.rendered" (click)="anchor(bad.innerHTML)"></ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
   <div *ngFor="let po of post">
     <div *ngFor="let media of mediaPostAsia">
       <ion-card *ngIf="po.featured_media == media.id">
-        <img [src]="media.source_url" (click)="openModal(po.categories)" />
-        <ion-card-content >
+        <img  #titulo [src]="media.source_url" (click)="openModal(po.categories)" />
+        <ion-card-content>
           <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
           <p [innerHTML]="po.excerpt.rendered | sanitizeHtml"></p>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='share-alt'></ion-icon>
-            Share
-          </button>
-          <button ion-button clear small>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon>
-              <ion-icon name="star-outline"></ion-icon>
-          </button>
+          <ion-fab  buttom left edge #fab1>
+            <button ion-fab mini><ion-icon name="share"></ion-icon></button>
+            <ion-fab-list side="right">
+              <button color="primary" ion-fab (click)="openSocial('facebook', fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('twitter', fab1)"><ion-icon name="logo-twitter"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('vimeo', fab1)"><ion-icon name="logo-vimeo"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('googleplus', fab1)"><ion-icon name="logo-googleplus"></ion-icon></button>
+            </ion-fab-list>
+          </ion-fab>
+          <ion-icon ion-item name="star"></ion-icon>
+
         </ion-card-content>
       </ion-card>
     </div>

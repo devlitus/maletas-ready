@@ -7,17 +7,30 @@
   </ion-navbar>
 </ion-header>
 <ion-content style="background-color: rgb(233, 255, 235)">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let po of post">
+        <ion-badge color="secondary" [innerHTML]="po.title.rendered"></ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <div *ngFor="let po of post">
     <div *ngFor="let me of mediaPostAfrica">
       <ion-card *ngIf="po.id == me.post">
-        <img [src]="me.imagen"/>
+        <img [src]="me.imagen" />
         <ion-card-content>
           <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
           <p [innerHTML]="po.excerpt.rendered"></p>
-          <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='share-alt'></ion-icon>
-            Share
-          </button>
+          <ion-fab buttom left edge #fab1>
+            <button ion-fab mini><ion-icon name="share"></ion-icon></button>
+            <ion-fab-list side="right">
+              <button color="primary" ion-fab (click)="openSocial('facebook', fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('twitter', fab1)"><ion-icon name="logo-twitter"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('vimeo', fab1)"><ion-icon name="logo-vimeo"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('googleplus', fab1)"><ion-icon name="logo-googleplus"></ion-icon></button>
+            </ion-fab-list>
+          </ion-fab>
+          <ion-icon ion-item name="star"></ion-icon>
         </ion-card-content>
       </ion-card>
     </div>

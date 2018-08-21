@@ -58,7 +58,7 @@ export class MyApp {
       };
       this.categoria.push(cat);
     }
-    console.log("categoria", this.categoria);
+    // console.log("categoria", this.categoria);
 
   }
   getPages() {
@@ -73,7 +73,7 @@ export class MyApp {
         return this.pages.push(e)
       }
     });
-    console.log(this.pages);
+    // console.log(this.pages);
   }
   openModal(id){
     let modal = this.modalCtrl.create(ModalPage, {id})

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, FabContainer } from 'ionic-angular';
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
@@ -59,6 +59,10 @@ export class AfricaPage {
       'imagenThumbnail': data.media_details.sizes.thumbnail.source_url */
     }
     this.mediaPostAfrica.push(img);
+  }
+  openSocial(network: string, fab: FabContainer) {
+    console.log('Share in ' + network);
+    fab.close();
   }
 
 
