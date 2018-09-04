@@ -3,4 +3,12 @@ page-asia {
 ion-badge{
   margin: 0.5rem;
 }
+ion-slides{
+  height: 50px;
+}
+.swiper-slide{
+  flex-shrink: 1 !important;
+  -webkit-flex-shrink-shrink: 1 !important;
+}
+
 }

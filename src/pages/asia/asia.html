@@ -7,22 +7,19 @@
   </ion-navbar>
 </ion-header>
 <ion-content style="background-color: rgb(233, 255, 235)">
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let po of post">
-          <ion-badge #bad color="secondary" [innerHTML]="po.title.rendered" (click)="anchor(bad.innerHTML)"></ion-badge>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
+  <ion-slides>
+    <ion-slide *ngFor="let po of post">
+        <ion-badge color="primary" [innerHTML]="po.title.rendered"></ion-badge>
+    </ion-slide>
+  </ion-slides>
   <div *ngFor="let po of post">
     <div *ngFor="let media of mediaPostAsia">
       <ion-card *ngIf="po.featured_media == media.id">
-        <img  #titulo [src]="media.source_url" (click)="openModal(po.categories)" />
+        <img #titulo [src]="media.source_url" (click)="openModal(po.categories)" />
         <ion-card-content>
           <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
           <p [innerHTML]="po.excerpt.rendered | sanitizeHtml"></p>
-          <ion-fab  buttom left edge #fab1>
+          <ion-fab buttom left edge #fab1>
             <button ion-fab mini><ion-icon name="share"></ion-icon></button>
             <ion-fab-list side="right">
               <button color="primary" ion-fab (click)="openSocial('facebook', fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
