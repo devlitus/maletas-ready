@@ -7,13 +7,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content style="background-color: rgb(233, 255, 235)">
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let po of post">
-        <ion-badge color="secondary" [innerHTML]="po.title.rendered"></ion-badge>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-slides>
+    <ion-slide *ngFor="let po of post" (click)="openModal(po.categories, po.title.rendered)">
+        <ion-badge color="primary" [innerHTML]="po.title.rendered"></ion-badge>
+    </ion-slide>
+  </ion-slides>
   <div *ngFor="let po of post">
     <div *ngFor="let media of mediaPostEuropa">
       <ion-card *ngIf=" po.featured_media == media.id">

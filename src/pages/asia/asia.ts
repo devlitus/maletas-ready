@@ -64,10 +64,12 @@ export class AsiaPage {
   }
   anchor(bad){
     // console.log(bad);
-    console.log(this.titulo.nativeElement.offsetParent.children);
+    console.log(bad);
+    
+    /* console.log(this.titulo.nativeElement.offsetParent.children);
     for (const i of this.titulo.nativeElement.offsetParent.children) {
       console.log(i.children);
-    }
+    } */
     
     /* for (let i = 0; i < this.titulo.nativeElement.offsetParent.children.length; i++) {
       const element = this.titulo.nativeElement.offsetParent.children[i];
@@ -83,8 +85,8 @@ export class AsiaPage {
     }) */
 
   }
-  openModal(id: string){
-    const modal = this.modalCtrl.create(ModalPage, {id});
+  openModal(id: string, titulo: string){
+    const modal = this.modalCtrl.create(ModalPage, {id, titulo});
     modal.present(); 
   }
 

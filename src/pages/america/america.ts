@@ -61,8 +61,8 @@ export class AmericaPage {
     // console.log(data);
 
   }
-  openModal(id){
-    const modal = this.modalCtrl.create(ModalPage, {id});
+  openModal(id: string, titulo: string){
+    const modal = this.modalCtrl.create(ModalPage, {id, titulo});
     modal.present(); 
   }
   openSocial(network: string, fab: FabContainer) {

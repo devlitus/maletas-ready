@@ -16,6 +16,7 @@ export class ModalPage {
   postAfrica: any = [];
   postEuropa: any = [];
   postMedia: any = [];
+  titulo: string="";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -30,23 +31,23 @@ export class ModalPage {
     this.Content.scrollTo(0, 0);
   }
   getPost(){
-    const params = this.navParams.get('id');
-    params.find(e => {
+    const paramsId = this.navParams.get('id');
+    paramsId.find(e => {
       if (e == 57) {
         this.getPostAsia();
       }
     });
-    params.find(e => {
+    paramsId.find(e => {
       if (e == 58) {
         this.getPostAmerica();
       }
     });
-    params.find(e => {
+    paramsId.find(e => {
       if (e == 60) {
         this.getPostEuropa();
       }
     });
-    params.find(e => {
+    paramsId.find(e => {
       if (e == 59) {
         this.getPostEuropa();
       }
@@ -55,9 +56,11 @@ export class ModalPage {
   }
 
   getPostAsia(){
-    const params = this.navParams.get('id');
-    console.log('params asia', params);
-    let temp = params.filter(e => {
+    const paramsId = this.navParams.get('id');
+    const paramsTitulo = this.navParams.get('titulo');
+    this.titulo = paramsTitulo;
+    console.log('params asia', paramsTitulo);
+    let temp = paramsId.filter(e => {
       if ((e !== 114) && (e !== 57)) {
         return e
       }
@@ -66,7 +69,9 @@ export class ModalPage {
   }
   getPostAmerica(){
     const params = this.navParams.get('id');
-    console.log('params america', params);
+    const paramsTitulo = this.navParams.get('titulo');
+    this.titulo = paramsTitulo;
+    console.log('params america', paramsTitulo);
     let temp = params.filter(e => {
       if ((e !== 114) && (e !== 58)) {
         return e
@@ -77,6 +82,8 @@ export class ModalPage {
   
   getPostEuropa(){
     const params = this.navParams.get('id');
+    const paramsTitulo = this.navParams.get('titulo');
+    this.titulo = paramsTitulo;
     console.log('params europa', params);
     let temp = params.filter(e => {
       if ((e !== 114) && (e !== 60)) {
