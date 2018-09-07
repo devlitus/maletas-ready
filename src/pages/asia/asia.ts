@@ -62,29 +62,7 @@ export class AsiaPage {
     // console.log('media ', this.mediaPostAsia);
     // console.log(data);
   }
-  anchor(bad){
-    // console.log(bad);
-    console.log(bad);
-    
-    /* console.log(this.titulo.nativeElement.offsetParent.children);
-    for (const i of this.titulo.nativeElement.offsetParent.children) {
-      console.log(i.children);
-    } */
-    
-    /* for (let i = 0; i < this.titulo.nativeElement.offsetParent.children.length; i++) {
-      const element = this.titulo.nativeElement.offsetParent.children[i];
-      const cont = element.innerText.split('\n');
-      content.push(cont)
-      console.log(element);
-    }
-    content[0].find(e => {
-      if (e === bad){
-        this.Content.scrollTo(0,this.titulo.nativeElement.offsetTop);
-        console.log(e);
-      }
-    }) */
-
-  }
+  
   openModal(id: string, titulo: string){
     const modal = this.modalCtrl.create(ModalPage, {id, titulo});
     modal.present(); 

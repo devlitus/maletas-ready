@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WpProvider } from "../providers/wp/wp";
 //pages
 import { HomePage, ModalPage } from "../app/index-pages";
+import { EmailProvider } from "../providers/email/email";
 
 
 @Component({
@@ -24,7 +25,8 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     private _wpService: WpProvider,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private _email: EmailProvider) {
     this.initializeApp();
     this.isAndroid = platform.is('android');
     this.getPages();
@@ -78,6 +80,9 @@ export class MyApp {
   openModal(id){
     let modal = this.modalCtrl.create(ModalPage, {id})
     modal.present();
+  }
+  sendeEmail(){
+    this._email.configEmail();
   }
 
 }

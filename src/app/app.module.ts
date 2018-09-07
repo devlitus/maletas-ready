@@ -18,9 +18,8 @@ import {
 //providers
 import { WpProvider } from '../providers/wp/wp';
 import { WpMediaProvider } from '../providers/wp-media/wp-media';
-
-
-
+import { EmailProvider } from '../providers/email/email';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -62,8 +61,8 @@ import { WpMediaProvider } from '../providers/wp-media/wp-media';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     WpProvider,
     WpMediaProvider,
-
-
+    EmailProvider,
+    EmailComposer
   ]
 })
 export class AppModule { }
