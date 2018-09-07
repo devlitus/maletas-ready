@@ -20,6 +20,7 @@ import { WpProvider } from '../providers/wp/wp';
 import { WpMediaProvider } from '../providers/wp-media/wp-media';
 import { EmailProvider } from '../providers/email/email';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
   declarations: [
@@ -58,11 +59,12 @@ import { EmailComposer } from '@ionic-native/email-composer';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     WpProvider,
     WpMediaProvider,
     EmailProvider,
-    EmailComposer
+    EmailComposer,
+    SocialSharing,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

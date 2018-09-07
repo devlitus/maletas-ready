@@ -3,47 +3,50 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <button ion-button clear end>
-        <ion-title>MaletaReady</ion-title>
-          <ion-icon color="primary" name="mail"></ion-icon>
-        </button>
-    
+    <ion-title>MaletaReady</ion-title>
+    <ion-buttons end padding-right> 
+      <button ion-button (click)="sendeEmail()"> 
+        <ion-icon color="secondary" name="mail"></ion-icon>
+      </button>
+      
+    </ion-buttons>    
+
   </ion-navbar>
 </ion-header>
 
 <ion-content style="background-color: rgb(233, 255, 235)" class="card-background-page">
-  <div *ngFor="let pg of page">
-    <span [ngSwitch]="pg.slug">
-      <p *ngSwitchCase="'america'">
-        <ion-card>
-          <img src="assets/imgs/America.png" (click)="onPages('america',pg.id)" />
-          <div class="card-title">Guia {{pg.title}}</div>
-        </ion-card>
-      </p>
-      <p *ngSwitchCase="'africa'">
-        <ion-card [hidden]='true'>
-          <img src="assets/imgs/Africa.png" (click)="onPages('africa')" />
-          <div class="card-title">Guia {{pg.title}}</div>
-        </ion-card>
-      </p>
-      <p *ngSwitchCase="'asia'">
-        <ion-card>
-          <img src="assets/imgs/Asia.png" (click)="onPages('asia')" />
-          <div class="card-title">Guia {{pg.title}}</div>
-        </ion-card>
-      </p>
-      <p *ngSwitchCase="'europa'">
-        <ion-card>
-          <img src="assets/imgs/Europe.png" (click)="onPages('europa')" />
-          <div class="card-title">Guia {{pg.title}}</div>
-        </ion-card>
-      </p>
-      <p *ngSwitchDefault>
-      </p>
-    </span>
 
-  </div>
-
+    <div *ngFor="let pg of page">
+        <span [ngSwitch]="pg.slug">
+          <p *ngSwitchCase="'america'">
+            <ion-card>
+              <img src="assets/imgs/America.png" (click)="onPages('america',pg.id)" />
+              <div class="card-title">Guia {{pg.title}}</div>
+            </ion-card>
+          </p>
+          <p *ngSwitchCase="'africa'">
+            <ion-card>
+              <img src="assets/imgs/Africa.png" (click)="onPages('africa')" />
+              <div class="card-title">Guia {{pg.title}}</div>
+            </ion-card>
+          </p>
+          <p *ngSwitchCase="'asia'">
+            <ion-card>
+              <img src="assets/imgs/Asia.png" (click)="onPages('asia')" />
+              <div class="card-title">Guia {{pg.title}}</div>
+            </ion-card>
+          </p>
+          <p *ngSwitchCase="'europa'">
+            <ion-card>
+              <img src="assets/imgs/Europe.png" (click)="onPages('europa')" />
+              <div class="card-title">Guia {{pg.title}}</div>
+            </ion-card>
+          </p>
+          <p *ngSwitchDefault>
+          </p>
+        </span>
+    
+      </div>
 </ion-content>
 
 

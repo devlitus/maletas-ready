@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 //provider
 import { WpProvider } from "../../providers/wp/wp";
+import { EmailProvider } from "../../providers/email/email";
 //Pages
 import { AmericaPage, AsiaPage, EuropaPage, AfricaPage } from "../../app/index-pages";
 
@@ -17,6 +18,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private _wpService: WpProvider,
+    private _email: EmailProvider
   ) {
     this.getPost();
     this.getPage();
@@ -100,5 +102,8 @@ export class HomePage {
       }
       this.categoria.push(detallCategoria);
     }
+  }
+  sendeEmail(){
+    this._email.configEmail();
   }
 }
