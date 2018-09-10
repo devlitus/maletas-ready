@@ -15,17 +15,17 @@
   <div #titulo *ngFor="let po of post">
     <div *ngFor="let media of mediaPostAsia">
       <ion-card *ngIf="po.featured_media == media.id">
-        <img  [src]="media.source_url" (click)="openModal(po.categories, po.title.rendered)" />
+        <img #imagen [src]="media.source_url" (click)="openModal(po.categories, po.title.rendered)" />
         <ion-card-content>
           <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
           <p [innerHTML]="po.excerpt.rendered | sanitizeHtml"></p>
           <ion-fab buttom left edge #fab1>
             <button ion-fab mini><ion-icon name="share"></ion-icon></button>
             <ion-fab-list side="right">
-              <button color="primary" ion-fab (click)="openSocial('facebook', fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('twitter', fab1)"><ion-icon name="logo-twitter"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('whatsapp', fab1)"><ion-icon name="logo-whatsapp"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('googleplus', fab1)"><ion-icon name="logo-googleplus"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('facebook',po.title.rendered, imagen.src, fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('twitter',po.title.rendered, imagen.src, fab1)"><ion-icon name="logo-twitter"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('whatsapp',po.title.rendered, imagen.src, fab1)"><ion-icon name="logo-whatsapp"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('googleplus',po.title.rendered, imagen.src, fab1)"><ion-icon name="logo-googleplus"></ion-icon></button>
             </ion-fab-list>
           </ion-fab>
           <ion-buttons end>

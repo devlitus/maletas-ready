@@ -80,11 +80,11 @@ export class AsiaPage {
     modal.present();
   }
 
-  openSocial(network: string, fab: FabContainer, post: any) {
+  openSocial(network: string, post: any, imagen: any, fab: FabContainer,) {
     switch (network) {
       case "facebook":
         this.socialSharing
-          .shareViaFacebook(post, "imagen")
+          .shareViaFacebook(post, imagen, null)
           .then(() => {
             // Success!
             console.log("Share in " + network);
@@ -97,7 +97,7 @@ export class AsiaPage {
         break;
       case "twitter":
         this.socialSharing
-        .shareViaTwitter(post, "imagen")
+        .shareViaTwitter(post, imagen, null)
         .then(() => {
           console.log("Share in " + network);
             // Success!
@@ -109,7 +109,7 @@ export class AsiaPage {
         break;
       case "whatsapp":
         this.socialSharing
-          .shareViaWhatsApp(post, "imagen")
+          .shareViaWhatsApp(post, imagen, null)
           .then(() => {
             console.log("Share in " + network);
             // Success!
@@ -122,14 +122,7 @@ export class AsiaPage {
       default:
         break;
     }
-    /* this.socialSharing
-      .shareViaFacebook("mensaje", "imagen")
-      .then(() => {
-        // Success!
-      })
-      .catch(() => {
-        // Error!
-      }); */
+
     fab.close();
   }
 }
