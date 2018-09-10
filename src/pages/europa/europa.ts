@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, Content, FabConta
 //providers
 import { WpProvider } from "../../providers/wp/wp";
 import { WpMediaProvider } from "../../providers/wp-media/wp-media";
+import { SocialSharing } from "@ionic-native/social-sharing";
 // page
 import { ModalPage } from "../modal/modal";
 
@@ -20,10 +21,12 @@ export class EuropaPage {
     public navParams: NavParams,
     private _wpService: WpProvider,
     private _wpMediaService: WpMediaProvider,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private socialSharing: SocialSharing
+  ) {
 
   }
-  scrollTop(){
+  scrollTop() {
     this.Content.scrollTo(0, 0);
   }
   ionViewDidLoad() {
@@ -43,30 +46,71 @@ export class EuropaPage {
           this.post.push(e);
         }
       }
-      
+
     })
     for (const imag of this.post) {
       for (const im of imag._links['wp:featuredmedia']) {
         this._wpMediaService.mediaUrl(im.href)
-        .subscribe(res => {
-          this.detalleMedia(res);
-        })
+          .subscribe(res => {
+            this.detalleMedia(res);
+          })
       }
     }
     // console.log('posts ', this.post);
   }
-  detalleMedia(data){
+  detalleMedia(data) {
     this.mediaPostEuropa.push(data);
     // console.log('media ', this.mediaPostEuropa);
     // console.log(data);
 
   }
-  openModal(id: string, titulo: string){
-    const modal = this.modalCtrl.create(ModalPage, {id, titulo});
-    modal.present(); 
+  openModal(id: string, titulo: string) {
+    const modal = this.modalCtrl.create(ModalPage, { id, titulo });
+    modal.present();
   }
-  openSocial(network: string, fab: FabContainer) {
-    console.log('Share in ' + network);
+  openSocial(network: string, post: any, imagen: any, fab: FabContainer) {
+    switch (network) {
+      case "facebook":
+        this.socialSharing
+          .shareViaFacebook(post.title.rendered, imagen, post.link)
+          .then(() => {
+            // Success!
+            console.log("Share in " + network);
+          })
+          .catch(() => {
+            // Error!
+            console.error("No se puede compartir");
+          });
+
+        break;
+      case "twitter":
+        this.socialSharing
+          .shareViaTwitter(post.title.rendered, imagen, post.link)
+          .then(() => {
+            console.log("Share in " + network);
+            // Success!
+          })
+          .catch(() => {
+            // Error!
+            console.error("No se puede compartir");
+          });
+        break;
+      case "whatsapp":
+        this.socialSharing
+          .shareViaWhatsApp(post.title.rendered, imagen, post.link)
+          .then(() => {
+            console.log("Share in " + network);
+            // Success!
+          })
+          .catch(() => {
+            // Error!
+            console.error("No se puede compartir");
+          });
+        break;
+      default:
+        break;
+    }
+
     fab.close();
   }
 

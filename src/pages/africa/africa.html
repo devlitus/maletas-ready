@@ -9,7 +9,7 @@
 <ion-content style="background-color: rgb(233, 255, 235)">
   <ion-slides>
     <ion-slide *ngFor="let po of post" (click)="openModal(po.categories, po.title.rendered)">
-        <ion-badge color="primary" [innerHTML]="po.title.rendered"></ion-badge>
+      <ion-badge color="primary" [innerHTML]="po.title.rendered"></ion-badge>
     </ion-slide>
   </ion-slides>
   <div *ngFor="let po of post">
@@ -20,15 +20,34 @@
           <ion-card-title [innerHTML]="po.title.rendered"></ion-card-title>
           <p [innerHTML]="po.excerpt.rendered"></p>
           <ion-fab buttom left edge #fab1>
-            <button ion-fab mini><ion-icon name="share"></ion-icon></button>
+            <button ion-fab mini>
+              <ion-icon name="share"></ion-icon>
+            </button>
             <ion-fab-list side="right">
-              <button color="primary" ion-fab (click)="openSocial('facebook', fab1)"><ion-icon name="logo-facebook"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('twitter', fab1)"><ion-icon name="logo-twitter"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('vimeo', fab1)"><ion-icon name="logo-vimeo"></ion-icon></button>
-              <button color="primary" ion-fab (click)="openSocial('googleplus', fab1)"><ion-icon name="logo-googleplus"></ion-icon></button>
+              <button color="primary" ion-fab (click)="openSocial('facebook',po.title.rendered, imagen.src, fab1)">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </button>
+              <button color="primary" ion-fab (click)="openSocial('twitter',po.title.rendered, imagen.src, fab1)">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </button>
+              <button color="primary" ion-fab (click)="openSocial('whatsapp',po.title.rendered, imagen.src, fab1)">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </button>
+              <button color="primary" ion-fab (click)="openSocial('googleplus',po.title.rendered, imagen.src, fab1)">
+                <ion-icon name="logo-googleplus"></ion-icon>
+              </button>
             </ion-fab-list>
           </ion-fab>
-          <ion-icon ion-item name="star"></ion-icon>
+          <ion-buttons end>
+            <button ion-button clear>
+              <ion-icon ion-item name="star"></ion-icon>
+              <ion-icon ion-item name="star"></ion-icon>
+              <ion-icon ion-item name="star"></ion-icon>
+              <ion-icon ion-item name="star"></ion-icon>
+              <ion-icon ion-item name="star"></ion-icon>
+            </button>
+
+          </ion-buttons>
         </ion-card-content>
       </ion-card>
     </div>
